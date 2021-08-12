@@ -1,0 +1,14 @@
+
+
+def stock_picker(prices)
+  profit = Hash.new(0)
+  prices.each_with_index do |e,i|  
+    j=prices.length-1
+    until j==0
+    profit["Buy on Day #{i} and Sell on Day #{j} for a profit of #{prices[j]-prices[i]}"] = prices[j]-prices[i]  if j>i 
+    j-= 1
+    end
+  end
+p profit.key(profit.select{|k,v| v>0}.values.max)
+end
+
