@@ -1,0 +1,6 @@
+def substring(string, dictionary)
+  words = string.downcase.split(' ').map{|e| e.gsub(/[[:punct:]]/,'')}
+  output=Hash.new(0)
+  dictionary.each{|e| output[e]+=1  if words.any?{|f| f.include?(e) } }
+  p output
+end
