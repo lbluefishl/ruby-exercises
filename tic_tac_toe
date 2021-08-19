@@ -62,7 +62,7 @@ class TicTacToe
     if @selected.include? selection
       p 'That option was already chosen before. Please pick another number.'
       user2_pick
-    elsif !((1..9).include? selection)
+    elsif !((0..8).include? selection)
       p 'Please enter a valid number.'
       user2_pick
     else
