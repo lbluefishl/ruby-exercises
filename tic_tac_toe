@@ -1,0 +1,87 @@
+class TicTacToe
+  def initialize
+    @items = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @selected = []
+  end
+
+  def print_board
+    p '     |     |     '
+    p "  #{@items[0]}  |  #{@items[1]}  |  #{@items[2]}  "
+    p '_____|_____|_____'
+    p '     |     |     '
+    p "  #{@items[3]}  |  #{@items[4]}  |  #{@items[5]}  "
+    p '_____|_____|_____'
+    p '     |     |     '
+    p "  #{@items[6]}  |  #{@items[7]}  |  #{@items[8]}  "
+    p '     |     |     '
+  end
+
+  def start
+    print_board
+    p "Let's play Tic-Tac-Toe!"
+    5.times { user_pick }
+  end
+
+  def winner1
+    p 'Player 1 wins!'
+    exit
+  end
+
+  def winner2
+    p 'Player 2 wins!'
+    exit
+  end
+
+  def user_pick
+    p 'Player 1 Goes First - Choose a number.'
+    user1_pick
+    print_board
+    winner1 if check_winner
+    p "It's a tie!" if @selected.length == 9
+    p 'Player 2 Goes Next - Choose a number.'
+    user2_pick
+    print_board
+    winner2 if check_winner
+  end
+
+  def user1_pick
+    selection = gets.chomp.to_i - 1
+    if @selected.include? selection
+      p 'That option was already chosen before. Please pick another number.'
+      user1_pick
+    elsif !((0..8).include? selection)
+      p 'Please enter a valid number.'
+      user1_pick
+    else @items[selection] = 'X'
+         @selected.push selection
+    end
+  end
+
+  def user2_pick
+    selection = gets.chomp.to_i - 1
+    if @selected.include? selection
+      p 'That option was already chosen before. Please pick another number.'
+      user2_pick
+    elsif !((1..9).include? selection)
+      p 'Please enter a valid number.'
+      user2_pick
+    else
+      @items[selection] = 'O'
+      @selected.push selection
+    end
+  end
+
+  def check_winner
+    return true if (@items[0] == @items[1] && @items[0] == @items[2]) ||
+                   (@items[3] == @items[4] && @items[3] == @items[5]) ||
+                   (@items[6] == @items[7] && @items[6] == @items[8]) ||
+                   (@items[0] == @items[3] && @items[0] == @items[6]) ||
+                   (@items[1] == @items[4] && @items[1] == @items[7]) ||
+                   (@items[2] == @items[5] && @items[2] == @items[8]) ||
+                   (@items[0] == @items[4] && @items[0] == @items[8]) ||
+                   (@items[2] == @items[4] && @items[2] == @items[6])
+  end
+end
+
+test = TicTacToe.new
+test.start
