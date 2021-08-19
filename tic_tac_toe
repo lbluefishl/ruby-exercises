@@ -32,12 +32,17 @@ class TicTacToe
     exit
   end
 
+  def tie
+    p "It's a tie!"
+    exit
+  end
+
   def user_pick
     p 'Player 1 Goes First - Choose a number.'
     user1_pick
     print_board
     winner1 if check_winner
-    p "It's a tie!" if @selected.length == 9
+    tie if @selected.length == 9
     p 'Player 2 Goes Next - Choose a number.'
     user2_pick
     print_board
